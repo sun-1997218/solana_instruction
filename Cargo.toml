@@ -1,0 +1,15 @@
+[package]
+name = "solana_instruction"
+version = "0.1.0"
+edition = "2024"
+
+
+#[no_mangle]
+pub unsafe extern "C" fn entrypoint(input: *mut u8) -> u64;
+
+[lib]
+crate-type = ["cdylib","lib"]
+
+[dependencies]
+borsh = "0.9.3"
+solana-program = "1.18.26"
