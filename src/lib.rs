@@ -66,7 +66,7 @@ fn process_initialize_counter(
     let account_space =8;//use u64 type to store account which take 8 bytes
 
     let rent = Rent::get()?;
-    let required_lamports = rent.minimum_balance(account_space);
+    let required_lamports = rent.minimum_balance(account_space);  //获取最低租金
 
     invoke (
         &system_instruction::create_account(
@@ -99,8 +99,8 @@ fn process_initialize_counter(
 fn process_increment_counter (program_id : &Pubkey,accounts:&[AccountInfo]) -> ProgramResult{
 
 
-    let account_iter = &mut accounts.iter();
-    let counter_account = next_account_info(account_iter)?;
+    let account_iter = &mut accounts.iter(); //获取账户的迭代器 可变
+    let counter_account = next_account_info(account_iter)?; //
 
 
     if counter_account.owner!=program_id{
