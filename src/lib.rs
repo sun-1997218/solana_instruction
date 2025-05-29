@@ -1,3 +1,4 @@
+
 use borsh::{BorshSerialize,BorshDeserialize};
 use solana_program::{
     account_info::{next_account_info, AccountInfo}, 
@@ -36,7 +37,7 @@ pub enum CounterInstruction {
 }
 impl CounterInstruction{
     pub fn unpack(input:&[u8]) -> Result<Self,ProgramError>{
-        let (&varient,rest) = input.split_first().ok_or(ProgramError::InvalidInstructionData)?;
+        let (&varient,rest) = input.split_first().ok_or(ProgramError::InvalidInstructionData)?;//获取指令类型，分离了第一个字节
         match varient{
             0=>{
                 let initial_value = u64::from_be_bytes(
@@ -62,7 +63,7 @@ fn process_initialize_counter(
     let payer_account = next_account_info(account_iter)?;
     let system_program =next_account_info(account_iter)?;
 
-    let account_space =8;
+    let account_space =8;//use u64 type to store account which take 8 bytes
 
     let rent = Rent::get()?;
     let required_lamports = rent.minimum_balance(account_space);

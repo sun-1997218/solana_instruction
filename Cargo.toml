@@ -4,8 +4,6 @@ version = "0.1.0"
 edition = "2024"
 
 
-#[no_mangle]
-pub unsafe extern "C" fn entrypoint(input: *mut u8) -> u64;
 
 [lib]
 crate-type = ["cdylib","lib"]
